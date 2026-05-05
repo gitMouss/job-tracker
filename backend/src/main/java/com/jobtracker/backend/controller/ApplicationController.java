@@ -2,12 +2,17 @@ package com.jobtracker.backend.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import com.jobtracker.backend.dto.ApplicationDTO;
 import com.jobtracker.backend.model.Application;
+import com.jobtracker.backend.model.Status;
 import com.jobtracker.backend.repository.ApplicationRepository;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -17,13 +22,14 @@ public class ApplicationController {
 
     private final ApplicationRepository applicationRepository;
 
+
     @GetMapping
-    public List<Application> getApplication() {
-        return applicationRepository.findAll();
+    public Page<Application> getAllApplications(@NonNull Pageable pageable) {
+        return applicationRepository.findAll(pageable);
     }
 
     @PostMapping
-    public Application createApplication(@RequestBody ApplicationDTO dto) {
+    public Application createApplication(@Valid @RequestBody ApplicationDTO dto) {
 
 
          Application application = Application.builder()
@@ -36,6 +42,16 @@ public class ApplicationController {
                 .build();
 
         return applicationRepository.save(application);
+    }
+
+    @GetMapping("/status/{status}")
+    public List<Application> getByStatus(@PathVariable Status status) {
+        return applicationRepository.findByStatus(status);
+    }
+
+    @GetMapping("/search")
+    public List<Application> searchByCompany(@RequestParam String company) {
+        return applicationRepository.findByCompanyContainingIgnoreCase(company);
     }
 
 }
