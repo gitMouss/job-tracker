@@ -1,0 +1,19 @@
+<h2>Ajouter une candidature</h2>
+
+<form (ngSubmit)="save()">
+    <input name="company" [(ngModel)]="application.company" placeholder="Entreprise" required>
+    <input name="position" [(ngModel)]="application.position" placeholder="Poste" required>
+    <input name="link" [(ngModel)]="application.link" placeholder="Lien" >
+
+    <select name="status" [(ngModel)]="application.status">
+        <option value="ENVOYEE">Envoyée</option>
+        <option value="ENTRETIEN">EnTRETIEN</option>
+        <option value="REFUS">Refus</option>
+        <option value="OFFRE">Offre</option>
+    </select>
+
+    <input name="appliedDate" [(ngModel)]="application.appliedDate" type="date" required>
+    <textarea name="notes" [(ngModel)]="application.notes" placeholder="Notes"></textarea>
+
+    <button type="submit">Ajouter</button>
+</form>

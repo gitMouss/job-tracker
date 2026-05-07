@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/applications")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class ApplicationController {
 
