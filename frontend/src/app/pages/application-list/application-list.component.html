@@ -1,0 +1,23 @@
+<h2>Applications</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (app of applications; track app.id) {
+            <tr>
+            <td>{{app.company}}</td>
+            <td>{{app.position}}</td>
+            <td>{{app.status}}</td>
+            <td>{{app.appliedDate}}</td>
+        </tr>
+        }
+    </tbody>
+</table>
